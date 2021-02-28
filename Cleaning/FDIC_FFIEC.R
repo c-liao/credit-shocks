@@ -55,7 +55,8 @@ ffiec_state_grouped$totalSBLoans_1mil_cpiadj <- (ffiec_state_grouped$totalSBLoan
 #merge ffiec and fdic dataset
 ffiec_fdic_state <- ffiec_state_grouped %>% full_join(by = c("State" = "FIPS_state", "Year" = "year", "cpi_1990"), fdic_state)
 #calculate proportion of total loans by fdic insured banks in a particular state and year that were from ffiec banks
-ffiec_fdic_state$sb1mil_loanRatio <- ffiec_fdic_state$totalSBLoans_1mil_cpiadj/ffiec_fdic_state$all_loans_cpiadj
+  
+ffiec_fdic_state$sb1mil_loanRatio <- ffiec_fdic_state$totalSBLoans_1mil_cpiadj/ffiec_fdic_state$ci_loans_cpiadj
 
 #write data
 system.time(fwrite(ffiec_fdic_state, "Datasets/Cleaned/FFIEC_FDIC.csv", nThread = 10))
